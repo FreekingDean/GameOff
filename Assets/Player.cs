@@ -4,6 +4,7 @@ using System.Collections;
 public class Player : MonoBehaviour {
 	private const int MAX_TAPS = 3;
 	private int tapMarker;
+	public bool flyLeft;
 
 	// Use this for initialization
 	void Start () {
@@ -26,5 +27,12 @@ public class Player : MonoBehaviour {
 			tapMarker = 0;
 		}
 		transform.position = new Vector2 (transform.position.x, (tapMarker*5)-5);
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			serveBeer()
+		}
+	}
+
+	void serveBeer() {
+		
 	}
 }
