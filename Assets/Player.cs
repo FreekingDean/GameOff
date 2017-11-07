@@ -4,7 +4,8 @@ using System.Collections;
 public class Player : MonoBehaviour {
 	private const int MAX_TAPS = 3;
 	private int tapMarker;
-	public bool flyLeft;
+	public int playerNum;
+	public GameObject beerPre;
 
 	// Use this for initialization
 	void Start () {
@@ -28,11 +29,20 @@ public class Player : MonoBehaviour {
 		}
 		transform.position = new Vector2 (transform.position.x, (tapMarker*5)-5);
 		if (Input.GetKeyDown (KeyCode.Space)) {
-			serveBeer()
+			serveBeer ();
 		}
 	}
 
 	void serveBeer() {
-		
+		GameObject beer;
+		int toAdd = 1;
+		if (flyLeft) {
+			toAdd = -1;
+		}
+		beer = (GameObject)Instantiate (beerPre, new Vector2 (transform.position.x + toAdd, transform.position.y), transform.rotation);
+		BeerController controller;
+		controller = beer.GetComponent<BeerController> ();
+		controller.flyLeft = flyLeft;
+		controller.shouldMove = true;
 	}
 }
